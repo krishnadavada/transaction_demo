@@ -19,8 +19,13 @@ const passbookSchema = new mongoose.Schema({
   nAmount: {
     type: Number,
     required: true
+  },
+  nTotalAmount: {
+    type: Number,
+    required: true,
+    default: 0
   }
 }, { timestamps: true });
 
-const passbook = mongoose.model('Passbooks', passbookSchema);
+const passbook = mongoose.model('Passbook', passbookSchema); // Use singular form
 module.exports = passbook;

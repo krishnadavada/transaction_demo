@@ -20,7 +20,7 @@ const oStatus = {
     some_wrong:'Something went wrong !',
     internal_err:'Internal server error !',
     not_exist:'## not exist!',
-    greater_amount:'Insufficient balance!',
+    insuf_amount:'Insufficient balance!',
     success_trans:'Transection successfull ! current balance : ##'
   }
   
