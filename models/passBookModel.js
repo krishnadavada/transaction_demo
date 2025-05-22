@@ -22,5 +22,5 @@ const passbookSchema = new mongoose.Schema({
   }
 }, { timestamps: true });
 
-const passbook = mongoose.model('Passbook', passbookSchema);
+const passbook = mongoose.model('Passbooks', passbookSchema);
 module.exports = passbook;

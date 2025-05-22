@@ -29,15 +29,10 @@ async function amountTransfer(req, res) {
       return res.status(404).json({ error: "User not found" });
     }
 
-    const transactions = await passbook.findOne({iUserId:fromUser});
-
-    //  let balance = 0;
-    // for (const tx of transactions) {
-    //   balance += tx.eTransactionType === 'CREDIT' ? tx.nAmount : -tx.nAmount;
-    // }
+    const transactions = await passbook.findOne({iUserId:fromUserId});
 
     console.log(transactions)
-    if (amount > balance) {
+    if (amount > transactions.nAmount) {
       await session.abortTransaction();
       session.endSession();
       return res.status(400).json({ error: "Insufficient balance" });
@@ -56,13 +51,13 @@ async function amountTransfer(req, res) {
         eTransactionType: 'CREDIT',
         nAmount: amount
       }
-    ], { session });
+    ], { session ,ordered:true});
 
     await session.commitTransaction();
     session.endSession();
 
     console.log("Transfer successful");
-    return res.status(200).json({ message: "Transfer successful", remainingBalance: balance - amount });
+    return res.status(200).json({ message: "Transfer successful", remainingBalance: transactions.nAmount - amount });
 
   } catch (err) {
     console.error("Transfer error:", err);
