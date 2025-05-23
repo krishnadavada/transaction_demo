@@ -22,4 +22,8 @@ app.get("/health", (req, res) => {
     return createResponse(res, oStatus.OK, oMessage.server_up);
 });
 
+app.all("/*all",(req,res)=>{
+    return createResponse(res,oStatus.NotFound,oMessage.not_found,"Api")
+})
+
 app.listen(nPort, () => console.log(`App listening on http://localhost:${nPort}`))
